@@ -1,0 +1,31 @@
+app:
+  name: "AI Digital Safety"
+  tagline: "Analyze Before You Trust."
+  version: "1.0.0-phase1"
+  environment: "development"   # development | production
+
+paths:
+  data_raw: "data/raw"
+  data_processed: "data/processed"
+  models_dir: "models"
+  reports_dir: "reports"
+  logs_dir: "logs"
+
+database:
+  url: "sqlite:///./ai_digital_safety.db"
+
+privacy:
+  store_analysis: false        # STORE_ANALYSIS env var overrides this
+  hash_algorithm: "sha256"
+
+security:
+  max_request_size_bytes: 20000
+  rate_limit_per_minute: 60
+  cors_allowed_origins_dev:
+    - "http://localhost:5173"
+    - "http://localhost:3000"
+
+phase: 1
+active_modules:
+  - sms
+  - url

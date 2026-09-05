@@ -1,0 +1,10 @@
+{
+  "phishing_examples": [
+    "http://paypa1-secure-login.top/signin/verify",
+    "http://192.168.1.1/bank/login.php"
+  ],
+  "safe_examples": [
+    "https://www.google.com",
+    "https://github.com"
+  ]
+}

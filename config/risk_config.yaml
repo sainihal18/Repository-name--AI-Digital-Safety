@@ -1,0 +1,29 @@
+# Risk engine configuration — every number here is intentionally
+# configurable, not hard-coded, per the project spec.
+
+weights:
+  ml: 0.55
+  rules: 0.25
+  threat_intelligence: 0.20
+
+thresholds:
+  low_risk_max: 34        # 0-34   -> LOW RISK
+  unknown_max: 49          # 35-49  -> UNKNOWN (only when evidence is weak, see logic below)
+  suspicious_max: 74       # 50-74  -> SUSPICIOUS
+  # 75-100 -> HIGH RISK
+
+unknown_logic:
+  # All three must be true simultaneously for a forced UNKNOWN verdict,
+  # regardless of the numeric score. This stops the engine from ever
+  # confidently guessing when it genuinely doesn't have enough signal.
+  min_model_confidence: 40
+  min_rule_evidence_count: 1
+  require_threat_intel_available: false
+
+threat_intel_override:
+  # If threat intel confirms known-malicious, risk is boosted but never
+  # blindly forced to 100 — the boost is additive and explained in evidence.
+  known_malicious_boost: 30
+  max_score: 100
+
+version: "v1.0"

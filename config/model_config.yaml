@@ -1,0 +1,39 @@
+# Model selection + hyperparameters. Switching MODEL_NAME does not
+# require code changes — ml/sms/models/model_registry.py reads this file.
+
+sms:
+  active_model: "tfidf_logistic_regression"   # tfidf_logistic_regression | distilbert | roberta
+  tfidf_logistic_regression:
+    max_features: 8000
+    ngram_range: [1, 2]
+    C: 1.0
+    class_weight: "balanced"
+  distilbert:
+    model_name: "distilbert-base-uncased"
+    max_length: 128
+    batch_size: 16
+    epochs: 3
+    learning_rate: 0.00002
+  roberta:
+    model_name: "roberta-base"
+    max_length: 128
+    batch_size: 16
+    epochs: 3
+    learning_rate: 0.00001
+
+url:
+  active_model: "random_forest"   # random_forest | gradient_boosting
+  random_forest:
+    n_estimators: 300
+    max_depth: 18
+    class_weight: "balanced"
+    random_state: 42
+  gradient_boosting:
+    n_estimators: 400
+    max_depth: 6
+    learning_rate: 0.05
+    random_state: 42
+
+random_seed: 42
+feature_version: "sms-features-v1"
+url_feature_version: "url-features-v1"

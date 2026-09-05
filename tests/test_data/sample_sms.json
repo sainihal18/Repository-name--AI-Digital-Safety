@@ -1,0 +1,10 @@
+{
+  "scam_examples": [
+    "URGENT! Your bank account has been suspended. Verify your OTP now.",
+    "Congratulations! You have won a prize, claim it now before it expires."
+  ],
+  "safe_examples": [
+    "Hey are we still on for lunch tomorrow?",
+    "Meeting moved to 3pm in conference room B."
+  ]
+}

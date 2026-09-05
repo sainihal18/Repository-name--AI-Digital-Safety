@@ -1,0 +1,288 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Core Palette ── */
+  --color-background: #050A15;
+  --color-surface: #0B132B;
+  --color-surface-alt: #0F1A35;
+  --color-surface-hover: #131F3D;
+  --color-surface-active: #1A2847;
+  --color-border: #1E293B;
+  --color-border-light: #334155;
+
+  /* ── Accent Colors ── */
+  --color-primary: #00F0FF;
+  --color-primary-muted: #00B8C5;
+  --color-secondary: #7000FF;
+  --color-secondary-muted: #5A00CC;
+  --color-accent: #A855F7;
+
+  /* ── Semantic Colors ── */
+  --color-success: #00FF9D;
+  --color-success-muted: #00CC7D;
+  --color-warning: #FFD700;
+  --color-warning-muted: #CCB000;
+  --color-danger: #FF0055;
+  --color-danger-muted: #CC0044;
+  --color-info: #3B82F6;
+
+  /* ── Verdict Colors ── */
+  --color-verdict-safe: #00FF9D;
+  --color-verdict-low: #22D3EE;
+  --color-verdict-unknown: #94A3B8;
+  --color-verdict-suspicious: #FBBF24;
+  --color-verdict-high: #F97316;
+  --color-verdict-critical: #FF0055;
+
+  /* ── Font ── */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ── Animations ── */
+  --animate-glow-pulse: glow 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-pulse-ring: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-slide-up: slide-up 0.5s ease-out;
+  --animate-fade-in: fade-in 0.6s ease-out;
+}
+
+/* ── Keyframes ── */
+@keyframes glow {
+  0%, 100% { opacity: 0.8; filter: brightness(1); }
+  50% { opacity: 1; filter: brightness(1.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 1; }
+  50% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(0.95); opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ── Base ── */
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #1e293b #050A15;
+  }
+
+  body {
+    @apply bg-background text-slate-200 antialiased min-h-screen font-sans;
+    selection {
+      @apply bg-primary/30 text-primary;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050A15;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* ── Utility Classes ── */
+
+/* Glassmorphic card */
+.glass-card {
+  background: linear-gradient(135deg, rgba(11, 19, 43, 0.8), rgba(15, 26, 53, 0.6));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(30, 41, 59, 0.5);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+.glass-card:hover {
+  border-color: rgba(0, 240, 255, 0.15);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.05);
+}
+
+/* Glow border */
+.glow-border {
+  position: relative;
+}
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(112, 0, 255, 0.3));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #00F0FF, #7000FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmer loading */
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.05), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Scanning line effect */
+.scan-line {
+  position: relative;
+  overflow: hidden;
+}
+.scan-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00F0FF, transparent);
+  animation: shimmer 3s linear infinite;
+}
+
+/* ── Phase 10: Cyber Aesthetic Additions ── */
+
+/* Fullscreen slide setup */
+html.cyber-layout, body.cyber-layout {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.cyber-slide {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-slides-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Hide scrollbar for a cleaner look */
+}
+.cyber-slides-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Text & Border Animations */
+.cyber-text-glow {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.cyber-border-scan {
+  position: relative;
+  overflow: hidden;
+}
+.cyber-border-scan::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  background: linear-gradient(180deg, transparent, rgba(0, 240, 255, 0.8), transparent) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: radar-sweep 4s linear infinite;
+}
+
+@keyframes radar-sweep {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Floating animation */
+.threat-float {
+  animation: float 4s ease-in-out infinite alternate;
+}
+
+/* Slide Dots */
+.slide-dots {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 100;
+}
+.slide-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+.slide-dot:hover {
+  background: rgba(0, 240, 255, 0.5);
+}
+.slide-dot.active {
+  background: #00F0FF;
+  box-shadow: 0 0 10px #00F0FF;
+  transform: scale(1.3);
+}
+
+/* Matrix Rain Text Effect */
+.matrix-text {
+  color: #00FF9D;
+  text-shadow: 0 0 8px rgba(0, 255, 157, 0.6);
+  font-family: var(--font-mono);
+}

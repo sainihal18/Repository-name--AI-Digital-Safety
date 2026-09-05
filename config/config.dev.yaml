@@ -1,0 +1,8 @@
+app:
+  environment: "development"
+security:
+  cors_allowed_origins:
+    - "http://localhost:5173"
+    - "http://localhost:3000"
+database:
+  url: "sqlite:///./ai_digital_safety.db"

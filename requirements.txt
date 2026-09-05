@@ -1,0 +1,32 @@
+# --- Core API ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+python-multipart==0.0.20
+starlette==0.41.3
+
+# --- Database ---
+sqlalchemy==2.0.36
+
+# --- Data / ML core (classical models — these run on CPU with no extras) ---
+pandas==2.2.3
+numpy==1.26.4
+scikit-learn==1.5.2
+joblib==1.4.2
+pyyaml==6.0.2
+
+# --- Transformers (DistilBERT / RoBERTa) ---
+# CPU-only by default; installs the right torch build for your platform.
+# For GPU/CUDA training, follow https://pytorch.org/get-started/locally/
+# and install the matching torch wheel BEFORE this line.
+torch==2.5.1
+transformers==4.47.1
+
+# --- Threat intelligence / HTTP ---
+requests==2.32.3
+
+# --- Explainability (optional, degrades gracefully if absent) ---
+shap==0.46.0
+
+# --- Reporting ---
+matplotlib==3.9.3
