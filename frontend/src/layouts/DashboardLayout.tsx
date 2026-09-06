@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { api } from '@/services/api';
 import CyberBackground from '@/components/CyberBackground';
+import cyberThreatPattern from '@/assets/cyber-threat-pattern.png';
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -96,7 +97,7 @@ export default function DashboardLayout() {
           ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
       >
-        <div className="absolute inset-0 opacity-10 mix-blend-screen pointer-events-none" style={{ backgroundImage: 'url(/src/assets/cyber-threat-pattern.png)', backgroundSize: '150px' }} />
+        <div className="absolute inset-0 opacity-10 mix-blend-screen pointer-events-none" style={{ backgroundImage: `url(${cyberThreatPattern})`, backgroundSize: '150px' }} />
         <div className="relative z-10 flex flex-col h-full">
           {/* Logo */}
           <div className="flex items-center gap-3 px-4 h-16 border-b border-border shrink-0">

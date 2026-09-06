@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import cyberDashboardBg from '@/assets/cyber-dashboard-bg.png';
 
 export default function CyberBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -100,7 +101,7 @@ export default function CyberBackground() {
       {/* Generated image overlay with multiply/screen for subtle texture */}
       <div 
         className="absolute inset-0 opacity-15 mix-blend-screen bg-cover bg-center"
-        style={{ backgroundImage: 'url(/src/assets/cyber-dashboard-bg.png)' }}
+        style={{ backgroundImage: `url(${cyberDashboardBg})` }}
       />
       
       {/* CSS Grid Overlay */}

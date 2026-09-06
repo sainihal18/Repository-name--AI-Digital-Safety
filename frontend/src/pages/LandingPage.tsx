@@ -5,6 +5,9 @@ import { ShieldAlert, Activity, ArrowRight, Zap, Target, Lock, Shield, Database,
 import RevealOnScroll from '@/components/RevealOnScroll';
 import CyberBackground from '@/components/CyberBackground';
 import CyberResourcesSection from '@/components/CyberResourcesSection';
+import cyberHeroBg from '@/assets/cyber-hero-bg.png';
+import hackerHeroBg from '@/assets/hacker_hero_bg.png';
+import cyberThreatPattern from '@/assets/cyber-threat-pattern.png';
 
 const slides = [
   { id: 'hero', title: 'Home' },
@@ -53,7 +56,7 @@ export default function LandingPage() {
       {/* Background layer 2: Hero Background image blending */}
       <div 
         className={`absolute inset-0 transition-opacity duration-1000 mix-blend-screen bg-cover bg-center pointer-events-none opacity-20`}
-        style={{ backgroundImage: 'url(/src/assets/cyber-hero-bg.png)' }}
+        style={{ backgroundImage: `url(${cyberHeroBg})` }}
       />
       
       {/* Navbar overlay */}
@@ -100,7 +103,7 @@ export default function LandingPage() {
           {/* Custom SOC Hacker Background */}
           <div 
             className="absolute inset-0 bg-cover bg-center pointer-events-none mix-blend-screen opacity-100" 
-            style={{ backgroundImage: 'url(/src/assets/hacker_hero_bg.png)' }} 
+            style={{ backgroundImage: `url(${hackerHeroBg})` }} 
           />
           {/* Gradient masking for the text on the left */}
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none" />
@@ -189,7 +192,7 @@ export default function LandingPage() {
 
         {/* ── SLIDE 2: THREAT LANDSCAPE ── */}
         <section className="cyber-slide flex flex-col justify-center items-center px-6 relative">
-           <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-screen" style={{ backgroundImage: 'url(/src/assets/cyber-threat-pattern.png)', backgroundSize: '150px' }} />
+           <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-screen" style={{ backgroundImage: `url(${cyberThreatPattern})`, backgroundSize: '150px' }} />
            
            <RevealOnScroll className="text-center mb-16 z-10 w-full max-w-5xl">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">The Global Threat Landscape</h2>
@@ -242,7 +245,7 @@ export default function LandingPage() {
 
         {/* ── SLIDE 4: HOW TO PROTECT YOURSELF ── */}
         <section className="cyber-slide flex flex-col justify-center items-center px-6 relative overflow-hidden">
-          <div className="absolute inset-0 bg-cover bg-center pointer-events-none mix-blend-screen opacity-15" style={{ backgroundImage: 'url(/src/assets/hacker_hero_bg.png)' }} />
+          <div className="absolute inset-0 bg-cover bg-center pointer-events-none mix-blend-screen opacity-15" style={{ backgroundImage: `url(${hackerHeroBg})` }} />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none" />
 
           <RevealOnScroll className="text-center mb-12 relative z-10">
@@ -300,7 +303,7 @@ export default function LandingPage() {
 
         {/* ── SLIDE 5: DARK LLMs & AGENTIC AI THREATS ── */}
         <section className="cyber-slide flex flex-col justify-center items-center px-6 relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-screen" style={{ backgroundImage: 'url(/src/assets/cyber-threat-pattern.png)', backgroundSize: '150px' }} />
+          <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-screen" style={{ backgroundImage: `url(${cyberThreatPattern})`, backgroundSize: '150px' }} />
           
           <RevealOnScroll className="text-center mb-12">
             <div className="text-[#FF0055] text-xs font-bold tracking-widest uppercase mb-3">EMERGING THREATS 2025</div>
