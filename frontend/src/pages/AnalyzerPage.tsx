@@ -82,7 +82,7 @@ export default function AnalyzerPage() {
         >
           <p className="text-sm text-danger">{error}</p>
           <p className="text-xs text-slate-500 mt-1">
-            Ensure the backend is running: <code className="text-primary/60">python -m uvicorn backend.main:app --reload</code>
+            Please check your network connection or try again later.
           </p>
         </motion.div>
       )}

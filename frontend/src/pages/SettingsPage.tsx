@@ -199,7 +199,7 @@ export default function SettingsPage() {
           <div className="flex justify-between py-2 border-b border-border">
             <span className="text-xs text-slate-500">API Base URL</span>
             <span className="text-xs text-success font-mono">
-              {import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1'}
+              {import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'}
             </span>
           </div>
           <div className="flex justify-between py-2 border-b border-border">
