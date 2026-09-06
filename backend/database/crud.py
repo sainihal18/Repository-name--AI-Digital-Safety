@@ -58,6 +58,38 @@ def get_analysis(db: Session, analysis_id: str) -> Optional[Analysis]:
     return db.query(Analysis).filter(Analysis.analysis_id == analysis_id).first()
 
 
+def get_history(db: Session, limit: int = 100) -> List[dict]:
+    records = db.query(Analysis).order_by(Analysis.timestamp.desc()).limit(limit).all()
+    out = []
+    for r in records:
+        try:
+            report_data = json.loads(r.report_json) if r.report_json else {}
+            # Use data from the JSON if available for richer UI, fallback to DB columns
+            scam_dna = report_data.get("scam_dna", [])
+            attack_chain = report_data.get("attack_chain", [])
+            evidence = report_data.get("evidence", {})
+            suspicious_terms = report_data.get("suspicious_terms", [])
+            extracted_urls = report_data.get("extracted_urls", [])
+
+            out.append({
+                "analysis_id": r.analysis_id,
+                "timestamp": r.timestamp.isoformat() if r.timestamp else None,
+                "input_type": r.input_type,
+                "verdict": r.verdict,
+                "risk_score": r.risk_score,
+                "confidence": r.confidence,
+                "category": r.category,
+                "scam_dna": scam_dna,
+                "attack_chain": attack_chain,
+                "evidence": evidence,
+                "suspicious_terms": suspicious_terms,
+                "extracted_urls": extracted_urls
+            })
+        except Exception:
+            continue
+    return out
+
+
 def save_feedback(db: Session, feedback: FeedbackRequest) -> Feedback:
     record = Feedback(
         analysis_id=feedback.analysis_id,

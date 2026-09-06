@@ -34,32 +34,30 @@ function App() {
   return (
     <>
       <CmdK />
-      <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/how-it-works" element={<HowItWorksPage />} />
-          <Route path="/safety-center" element={<SafetyCenterPage />} />
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/how-it-works" element={<Suspense fallback={<PageLoader />}><HowItWorksPage /></Suspense>} />
+          <Route path="/safety-center" element={<Suspense fallback={<PageLoader />}><SafetyCenterPage /></Suspense>} />
+          <Route path="/about" element={<Suspense fallback={<PageLoader />}><AboutPage /></Suspense>} />
         
           <Route element={<DashboardLayout />}>
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/analyze" element={<AnalyzerPage />} />
-            <Route path="/history" element={<HistoryPage />} />
-            <Route path="/threat-intel" element={<ThreatIntelPage />} />
-            <Route path="/reports" element={<ReportsPage />} />
-            <Route path="/settings" element={<SettingsPage />} />
-            <Route path="/password-checker" element={<PasswordCheckerPage />} />
-            <Route path="/scanner" element={<PortScannerPage />} />
-            <Route path="/honeypot" element={<HoneypotPage />} />
-            <Route path="/vault" element={<SecureVaultPage />} />
+            <Route path="/dashboard" element={<Suspense fallback={<PageLoader />}><DashboardPage /></Suspense>} />
+            <Route path="/analyze" element={<Suspense fallback={<PageLoader />}><AnalyzerPage /></Suspense>} />
+            <Route path="/history" element={<Suspense fallback={<PageLoader />}><HistoryPage /></Suspense>} />
+            <Route path="/threat-intel" element={<Suspense fallback={<PageLoader />}><ThreatIntelPage /></Suspense>} />
+            <Route path="/reports" element={<Suspense fallback={<PageLoader />}><ReportsPage /></Suspense>} />
+            <Route path="/settings" element={<Suspense fallback={<PageLoader />}><SettingsPage /></Suspense>} />
+            <Route path="/password-checker" element={<Suspense fallback={<PageLoader />}><PasswordCheckerPage /></Suspense>} />
+            <Route path="/scanner" element={<Suspense fallback={<PageLoader />}><PortScannerPage /></Suspense>} />
+            <Route path="/honeypot" element={<Suspense fallback={<PageLoader />}><HoneypotPage /></Suspense>} />
+            <Route path="/vault" element={<Suspense fallback={<PageLoader />}><SecureVaultPage /></Suspense>} />
             {/* Phase 11: Pro Labs */}
-            <Route path="/analyze/email" element={<EmailAnalyzerPage />} />
-            <Route path="/analyze/qr" element={<QRScannerPage />} />
-            <Route path="/monitor/darkweb" element={<DarkWebMonitorPage />} />
-            <Route path="/copilot" element={<CyberCopilotPage />} />
+            <Route path="/analyze/email" element={<Suspense fallback={<PageLoader />}><EmailAnalyzerPage /></Suspense>} />
+            <Route path="/analyze/qr" element={<Suspense fallback={<PageLoader />}><QRScannerPage /></Suspense>} />
+            <Route path="/monitor/darkweb" element={<Suspense fallback={<PageLoader />}><DarkWebMonitorPage /></Suspense>} />
+            <Route path="/copilot" element={<Suspense fallback={<PageLoader />}><CyberCopilotPage /></Suspense>} />
           </Route>
         </Routes>
-      </Suspense>
     </>
   );
 }

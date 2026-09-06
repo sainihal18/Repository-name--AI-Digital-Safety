@@ -66,6 +66,11 @@ export const api = {
     return res.data;
   },
 
+  getHistory: async (): Promise<AnalysisReport[]> => {
+    const res = await apiClient.get<AnalysisReport[]>('/analysis');
+    return res.data;
+  },
+
   getAnalysis: async (analysisId: string): Promise<AnalysisReport> => {
     const res = await apiClient.get<AnalysisReport>(`/analysis/${analysisId}`);
     return res.data;

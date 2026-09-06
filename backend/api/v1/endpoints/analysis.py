@@ -9,6 +9,11 @@ from backend.database.session import get_db
 router = APIRouter()
 
 
+@router.get("/analysis")
+def get_history_endpoint(db: Session = Depends(get_db)):
+    return crud.get_history(db)
+
+
 @router.get("/analysis/{analysis_id}")
 def get_analysis_endpoint(analysis_id: str, db: Session = Depends(get_db)):
     record = crud.get_analysis(db, analysis_id)

@@ -27,33 +27,28 @@ const verdictColor: Record<Verdict, string> = {
   'CRITICAL': '#FF0055',
 };
 
-// We store analyses locally since the backend doesn't have a list endpoint yet
-function getStoredAnalyses(): AnalysisReport[] {
-  try {
-    const data = localStorage.getItem('analysis_history');
-    return data ? JSON.parse(data) : [];
-  } catch {
-    return [];
-  }
-}
+// We now pull history directly from the backend
 
-export function storeAnalysis(report: AnalysisReport) {
-  const history = getStoredAnalyses();
-  // Avoid duplicates
-  const filtered = history.filter(h => h.analysis_id !== report.analysis_id);
-  filtered.unshift(report);
-  // Keep last 100
-  localStorage.setItem('analysis_history', JSON.stringify(filtered.slice(0, 100)));
-}
 
 export default function HistoryPage() {
   const [analyses, setAnalyses] = useState<AnalysisReport[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [filterVerdict, setFilterVerdict] = useState<Verdict | ''>('');
   const [selected, setSelected] = useState<AnalysisReport | null>(null);
 
   useEffect(() => {
-    setAnalyses(getStoredAnalyses());
+    (async () => {
+      try {
+        const data = await api.getHistory();
+        setAnalyses(data);
+      } catch (err: any) {
+        setError(err.message || 'Failed to load history');
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, []);
 
   const filtered = analyses.filter(a => {
@@ -135,14 +130,22 @@ export default function HistoryPage() {
       )}
 
       {/* History list */}
-      {filtered.length === 0 ? (
+      {loading ? (
+        <div className="flex justify-center items-center h-32">
+          <div className="w-8 h-8 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+        </div>
+      ) : error ? (
+        <div className="glass-card p-5 border border-danger/20 text-center">
+          <p className="text-sm text-danger">{error}</p>
+        </div>
+      ) : filtered.length === 0 ? (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="glass-card p-12 text-center"
         >
           <Clock className="w-10 h-10 text-slate-600 mx-auto mb-3" />
-          <h3 className="text-sm font-semibold text-slate-400">No analyses yet</h3>
+          <h3 className="text-sm font-semibold text-slate-400">No analyses found</h3>
           <p className="text-xs text-slate-500 mt-1">
             {analyses.length === 0
               ? 'Run your first analysis in the Analyzer tab.'

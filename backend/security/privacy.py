@@ -30,7 +30,7 @@ def redact_sensitive(text: str) -> str:
 
 
 def should_store_analysis() -> bool:
-    return os.getenv("STORE_ANALYSIS", "false").lower() == "true"
+    return os.getenv("STORE_ANALYSIS", "true").lower() == "true"
 
 
 def hash_content(text: str) -> str:
