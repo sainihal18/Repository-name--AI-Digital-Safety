@@ -86,20 +86,22 @@
 
 /* ── Base ── */
 @layer base {
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #1e293b #050A15;
-  }
-
   body {
-    @apply bg-background text-slate-200 antialiased min-h-screen font-sans;
-    selection {
-      @apply bg-primary/30 text-primary;
-    }
+    background-color: var(--color-background);
+    color: #e2e8f0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+  }
+  body ::selection {
+    background-color: rgba(0, 240, 255, 0.3);
+    color: var(--color-primary);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    font-weight: 600;
+    letter-spacing: -0.025em;
   }
 }
 
@@ -124,8 +126,8 @@
 /* Glassmorphic card */
 .glass-card {
   background: linear-gradient(135deg, rgba(11, 19, 43, 0.8), rgba(15, 26, 53, 0.6));
-  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(30, 41, 59, 0.5);
   border-radius: 16px;
   transition: all 0.3s ease;
@@ -147,6 +149,7 @@
   padding: 1px;
   background: linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(112, 0, 255, 0.3));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
@@ -213,7 +216,6 @@ html.cyber-layout, body.cyber-layout {
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  scrollbar-width: none; /* Hide scrollbar for a cleaner look */
 }
 .cyber-slides-container::-webkit-scrollbar {
   display: none;
@@ -236,6 +238,7 @@ html.cyber-layout, body.cyber-layout {
   border-radius: inherit;
   background: linear-gradient(180deg, transparent, rgba(0, 240, 255, 0.8), transparent) border-box;
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: radar-sweep 4s linear infinite;
